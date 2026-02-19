@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Welcome, {{ current_user.username }}</h3>
+
+{% if current_user.role == "admin" %}
+<h4>Add Course</h4>
+<form method="POST" action="/add_course">
+    <input type="text" name="title" placeholder="Course Title" required>
+    <textarea name="description" placeholder="Course Description"></textarea>
+    <button type="submit">Add Course</button>
+</form>
+{% endif %}
+
+<h4>Available Courses</h4>
+<ul>
+    {% for course in courses %}
+    <li>
+        <strong>{{ course.title }}</strong><br>
+        {{ course.description }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
